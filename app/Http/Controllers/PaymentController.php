@@ -22,7 +22,7 @@ class PaymentController extends Controller
         session()->put('f_name', $customer['f_name']);    
         $order = Order::where(['id' => $request->order_id, 'user_id' => $request['customer_id']])->first();
         
-        //dd($request); -debugging
+        //dd($request); //-debugging
         if (isset($customer) && isset($order)) {
             $data = [
                 'name' => $customer['f_name'],
@@ -30,6 +30,7 @@ class PaymentController extends Controller
                 'phone' => $customer['phone'],
             ];
             session()->put('data', $data);
+
             return view('payment-view');
         }
 
