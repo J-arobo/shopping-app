@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers;
 
@@ -10,16 +10,17 @@ class PaymentController extends Controller
 {
     public function payment(Request $request)
     {
-        
+
         if ($request->has('callback')) {
             Order::where(['id' => $request->order_id])->update(['callback' => $request['callback']]);
         }
-
+        
+        //session is a temporary memory for a specific user
         session()->put('customer_id', $request['customer_id']);
         session()->put('order_id', $request->order_id);
 
         $customer = User::find($request['customer_id']);
-        session()->put('f_name', $customer['f_name']);    
+        session()->put('f_name', $customer['f_name']);
         $order = Order::where(['id' => $request->order_id, 'user_id' => $request['customer_id']])->first();
         
         //dd($request); //-debugging
@@ -45,6 +46,7 @@ class PaymentController extends Controller
         }
         return response()->json(['message' => 'Payment succeeded'], 200); */
          return redirect('&status=success');
+
     }
 
     public function fail()

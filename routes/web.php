@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Routes;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,13 +19,12 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'payment-mobile'], function () {
     Route::get('/', 'PaymentController@payment')->name('payment-mobile');
-    Route::get('set-payment-method/{name}', 'PaymentController@set_payment_method')->name('set-payment-method');
+    Route::get('set-payment-method/{name}', 'PaymentController@set_payment_method')->
+         name('set-payment-method');
 });
+Route::get('paypal-status', 'PaypalPaymentController@getPaymentStatus')->name(
+    'paypal-status');
 
-Route::get('paypal-status', 'PaypalPaymentController@getPaymentStatus')->name('paypal-status');
-//Route::post('pay-paypal', 'PaypalPaymentController@payWithpaypal')->name('pay-paypal');
-Route::post('pay-paypal', 'PaypalPaymentController@payWithpaypal') -> name('pay-paypal');
+Route::post('paypal', 'PaypalPaymentController@payWithpaypal')->name('paypal');
 Route::get('payment-success', 'PaymentController@success')->name('payment-success');
 Route::get('payment-fail', 'PaymentController@fail')->name('payment-fail');
-
-

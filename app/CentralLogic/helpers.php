@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class Helpers
 {
-    public static function error_processor($validator)
+    public static function  errror_processor($validator)
     {
         $err_keeper = [];
         foreach ($validator->errors()->getMessages() as $index => $error) {
@@ -18,23 +18,25 @@ class Helpers
         }
         return $err_keeper;
     }
-
-    public static function get_business_settings($name)
+    
+         public static function get_business_settings($name)
     {
         $config = null;
-        
+
         $paymentmethod = BusinessSetting::where('key', $name)->first();
 
-        if($paymentmethod) {
+        if($paymentmethod){
+
             $config = json_decode(json_encode($paymentmethod->value), true);
             $config = json_decode($config, true);
         }
 
         return $config;
     }
-    
-    public static function currency_code()
+
+        public static function currency_code()
     {
         return BusinessSetting::where(['key' => 'currency'])->first()->value;
     }
+    
 }

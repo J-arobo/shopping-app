@@ -53,22 +53,22 @@
             <div class="checkout_details mt-3">
                 <div class="row">
 
-
-                    @php($config=\App\CentralLogics\Helpers::get_business_settings('paypal'))               
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
-                            <div class="card">
-                                <div class="card-body pb-0 pt-1" style="height: 70px">
-                                    <form class="needs-validation" method="POST" id="payment-form"
-                                     action="{{ route('pay-paypal' )}}">
-                                        {{ csrf_field() }}
-                                        <button class="btn btn-block" type="submit">
-                                            <img width="100"
-                                                 src="{{asset('assets/admin/img/paypal.png')}}"/>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
+                
+                @php($config=\App\CentralLogics\Helpers::get_business_settings('paypal'))
+                    <div class="col-md-6 mb-4" style="cursor:pointer">
+                        <div class="card">
+                            <div class="card-body pb-0 pt-1" style="height: 70px">
+                                <form class="needs-validation" method="POST" id="payment-form"
+                                    action="{{ route('paypal')}}">
+                                  {{ csrf_field() }}
+                                  <button class="btn btn-block" type="submit">
+                                        <img width="100"
+                                            src="{{asset('assets/admin/img/paypal.png')}}"/>
+                                  </button>
+                                </form>
+                            </div> 
                         </div>
+                    </div>   
 
 
                 </div>
@@ -88,46 +88,4 @@
 </body>
 </html>
 
-
-
-
-
-
-<!----
-<div class="container pb-5 mb-2 mb-md-4">
-    <div class="row">
-        <div class="col-md-12 mb-5 pt-5">
-            <center class="">
-                <h1>Payment method</h1>
-            </center>
-        </div>
-        @php($order=\App\Models\Order::find(session('order_id')))
-        <section class="col-lg-12">
-            <div class="checkout_details mt-3">
-                <div class="row">
-
-
-                    @php($config=\App\CentralLogics\Helpers::get_business_settings('paypal'))
-                    
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
-                            <div class="card">
-                                <div class="card-body pb-0 pt-1" style="height: 70px">
-                                    <form action="{{ route('pay-paypal' )}}" method="post" class="needs-validation" id="payment-form">
-                                        @csrf
-                                        <button class="btn btn-block" type="submit">
-                                            <img width="100"
-                                                 src="{{asset('assets/admin/img/paypal.png')}}"/>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-
-                </div>
-            </div>
-        </section>
-    </div>
-</div>
-    -->
 
