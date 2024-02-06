@@ -50,12 +50,12 @@ class PaymentController extends Controller
     }
 
     public function fail()
-    {
+    {   
         $order = Order::where(['id' => session('order_id'), 'user_id'=>session('customer_id')])->first();
         /*if ($order->callback != null) {
             return redirect($order->callback . '&status=fail');
         }
         return response()->json(['message' => 'Payment failed'], 403);*/
-         return redirect('&status=success');
+         return redirect('&status=fail');
     }
 }

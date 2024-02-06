@@ -55,7 +55,7 @@ Route::group(['namespace' => 'Api\V1'], function () {
             Route::get('track', 'OrderController@track_order');
             Route::put('payment-method', 'OrderController@update_payment_method');
         });
-            Route::group(['prefix' => 'order'], function (){
+            Route::group(['prefix' => 'order'], function () {
 
                 Route::post('place', 'OrderController@place_order');
 

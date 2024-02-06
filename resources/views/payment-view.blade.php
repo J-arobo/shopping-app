@@ -59,7 +59,7 @@
                         <div class="card">
                             <div class="card-body pb-0 pt-1" style="height: 70px">
                                 <form class="needs-validation" method="POST" id="payment-form"
-                                    action="{{ route('paypal')}}">
+                                    action="{{ route('pay-paypal')}}">
                                   {{ csrf_field() }}
                                   <button class="btn btn-block" type="submit">
                                         <img width="100"
@@ -84,6 +84,8 @@
 <script src="{{asset('assets/admin')}}/js/sweet_alert.js"></script>
 <script src="{{asset('assets/admin')}}/js/toastr.js"></script>
 <script src="{{asset('assets/admin')}}/js/bootstrap.min.js"></script>
+
+
 
 </body>
 </html>

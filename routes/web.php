@@ -25,6 +25,6 @@ Route::group(['prefix' => 'payment-mobile'], function () {
 Route::get('paypal-status', 'PaypalPaymentController@getPaymentStatus')->name(
     'paypal-status');
 
-Route::post('paypal', 'PaypalPaymentController@payWithpaypal')->name('paypal');
+Route::post('pay-paypal', 'PaypalPaymentController@payWithpaypal')->name('pay-paypal');
 Route::get('payment-success', 'PaymentController@success')->name('payment-success');
 Route::get('payment-fail', 'PaymentController@fail')->name('payment-fail');

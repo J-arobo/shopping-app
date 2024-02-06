@@ -108,7 +108,7 @@ public function payWithpaypal(Request $request)
                 DB::table('orders')
                     ->where('id', $order->id)
                     ->update([
-                        //'transaction_reference' => $payment->getId(),
+                        'transaction_reference' => $payment->getId(),
                         'payment_method' => 'paypal',
                         'order_status' => 'success',
                         'failed' => now(),
@@ -125,8 +125,7 @@ public function payWithpaypal(Request $request)
                 }
 
             } catch (\Exception $ex) {
-               dd($ex);
-               exit(1);
+               dd($ex->getData());
                //dd($ex->getData('payment-fail'));
                //   Toastr::error(trans($ex->getData(),['method'=>trans('messages.paypal')]));
 
