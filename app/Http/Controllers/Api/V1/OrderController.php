@@ -50,7 +50,7 @@ class OrderController extends Controller
                 newly added
         */
         $order->payment_status=$request['payment_method']=='wallet'?'paid':'unpaid';
-        $order->order_status=$request['payment_method']=='digital_payment'?'failed';
+        $order->order_status=$request['payment_method']=='digital_payment'?'failed':
             ($request->payment_method=='wallet'?'confirmed':'pending');
         $order->payment_method = $request->payment_method;
 
@@ -66,7 +66,7 @@ class OrderController extends Controller
         }   
         $order->scheduled_at=$scheduled_at;
         $order->scheduled=$request->scheduled_at?1:0;
-        
+
         /*
         ends here
         */
@@ -114,6 +114,14 @@ class OrderController extends Controller
             insert method is part of query builder
             */
             OrderDetail::insert($order_details);
+
+            /*
+                newly added for sending notifications
+            */
+            Helpers::send_order_notification($order, $request->user()->cm_firebase_token);
+            /*
+            ending here
+            */
 
             return response()->json([
                 'message' => trans('messages.order_placed_successfully'),
