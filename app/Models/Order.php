@@ -21,12 +21,12 @@ class Order extends Model
     ];
 
     public function setDeliveryChargeAttribute($value)
-    {   //Orderdetails
+    {   
         $this->attributes['delivery_charge'] = round($value, 3);
     }
 
     public function details()
-    {
-        return $this->hasMany(OrderDetail::class);
+    {  //Orderdetails - table
+        return $this->hasMany(OrderDetail::class);  //has many is an eloquent
     }
 }
