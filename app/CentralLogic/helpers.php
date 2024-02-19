@@ -38,9 +38,8 @@ class Helpers
     {
         return BusinessSetting::where(['key' => 'currency'])->first()->value;
     }
-    /*
 
-    //firebase return notification
+    //firebase notification
     public static function send_order_notification($order, $token){
         try{
             $status = $order->order_status;
@@ -51,7 +50,7 @@ class Helpers
                 
                 $data = [
                     'title' =>trans('messages.order_push_title'),
-                    'description'=$value;
+                    'description'=>$value,
                     'order_id'=>$order->id,
                     'image'=>'',
                     'type'=>'order_status',
@@ -71,24 +70,73 @@ class Helpers
                     return response()->json([$e], 403);
                 }
             }
-
+            /*
             return true;
+            */
         } catch (\Exception $e){
             info($e);
         }
         return false;
     }
-    
-    
-        public static function send_push_notif_to device($fcm_token, $data, $delivery=0)
-        {
-            $key=0;
-            if($delivery==1){
-                $key = BusinessSetting::where(['key' => 'deliver'])
+            public static function send_push_notif_to_device($fcm_token, $data, $delivery=0){
+                $key=0;
+                if($delivery=1){
+                    $key = BusinessSetting::where(['key' => 'delivery_boy_push_notification_key'])->first()->value;
+                }else{
+                    $key = BusinessSetting::where(['key' => 'push_notification_key'])->first()->value;
+                }
+
+                $url = "https://fcm.googleapis.com/fcm/send";
+                $header = array("authorization:key=" . $key['content'] . "",
+                    "content-type: application/json"
+            );
+
+            $postdata = '{
+                "to": "' . $fcm_token . '",
+                "mutable_content": true,
+                "data" : {
+                    "title":"' . $data['title'] . '",
+                    "body":"' . $data['description'] . '",
+                    "order_id":"' . $data['order_id'] . '",
+                    "type":"' . $data['type'] . '",
+                    "is_ready": 0
+            },
+            "notification" : {
+                "title": "' . $data['title'] . '",
+                "body": "' . $data['description'] . '",
+                "order_id": "' . $data['order_id'] . '",
+                "title_loc_key": "' . $data['order_id'] . '",
+                "body_loc_key": "' . $data['type'] . '",
+                "type": "' . $data['type'] . '",
+                "is_read": 0,
+                "icon": "new",
+                "android_channel_id": "dbfood",
             }
+        }';
+
+        $ch = curl_init();
+        $timeout = 120;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+        curl_setopt($ch, CURLOPT_URL, $header);
+
+        //Get URL content
+        $result = curl_exec($ch);
+            if($result === FALSE){
+                dd( curl_error($ch));
+            }
+         
+            curl_close($ch);
+
+            return $result;
         }
 
-        public statis function order_status_update_message($status)
+
+
+        public static function order_status_update_message($status)
         {
             if($status == 'pending'){
 
@@ -114,7 +162,8 @@ class Helpers
             }else{
                 $data = '{"status":"0","message":""}';
             }
+            return $data['value']['message'];
         }
-        */
+        
     
 }
