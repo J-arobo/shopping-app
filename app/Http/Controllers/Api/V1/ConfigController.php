@@ -69,7 +69,7 @@ class ConfigController extends Controller
             'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='
             .$request['search_text']
             .'&key='
-            .'AIzaSyDaYFNrylg1Yt7F8Jl0p8QJZaXuumbPEDQ'
+            .'AIzaSyB3KHB706SgH5_82H895Qtk9Z6PgpUFoQ0'
         );
         return $response->json();
     }
