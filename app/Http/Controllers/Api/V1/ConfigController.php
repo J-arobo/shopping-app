@@ -24,7 +24,7 @@ class ConfigController extends Controller
             return response()->json(['errors' => Helpers::error_processor($validator)], 403);
         }
        
-        $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json?latlng='.$request->lat.','.$request->lng.'&key='."AIzaSyDaYFNrylg1Yt7F8Jl0p8QJZaXuumbPEDQ");
+        $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json?latlng='.$request->lat.','.$request->lng.'&key='."AIzaSyB3KHB706SgH5_82H895Qtk9Z6PgpUFoQ0");
         return $response->json();
     }
         public function get_zone(Request $request)
@@ -88,7 +88,7 @@ class ConfigController extends Controller
         $response=Http::get(
             'https://maps.googleapis.com/maps/api/place/details/json?placeid='
             .$request['placeid']
-            .'&key='.'AIzaSyDaYFNrylg1Yt7F8Jl0p8QJZaXuumbPEDQ');
+            .'&key='.'AIzaSyB3KHB706SgH5_82H895Qtk9Z6PgpUFoQ0');
         return $response->json();
     }
 }
