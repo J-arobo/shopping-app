@@ -120,7 +120,7 @@ class OrderController extends Controller
             */
             Helpers::send_order_notification($order, $request->user()->cm_firebase_token);
             /*
-            ending here
+            ends here
             */
 
             return response()->json([
