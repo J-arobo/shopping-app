@@ -69,10 +69,9 @@ class Helpers
 
                     return response()->json([$e], 403);
                 }
-            }
-            /*
+            }          
             return true;
-            */
+
         } catch (\Exception $e){
             info($e);
         }
