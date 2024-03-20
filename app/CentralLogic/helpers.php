@@ -77,7 +77,8 @@ class Helpers
         }
         return false;
     }
-            public static function send_push_notif_to_device($fcm_token, $data, $delivery=0){
+            public static function send_push_notif_to_device($fcm_token, $data, $delivery=0)
+            {
                 $key=0;
                 if($delivery=1){
                     $key = BusinessSetting::where(['key' => 'delivery_boy_push_notification_key'])->first()->value;
@@ -120,7 +121,7 @@ class Helpers
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-        curl_setopt($ch, CURLOPT_URL, $header);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 
         //Get URL content
         $result = curl_exec($ch);
@@ -140,6 +141,7 @@ class Helpers
             if($status == 'pending'){
 
                 $data  = BusinessSetting::where('key', 'order_pending_message')->first();
+
             } elseif($status == 'confirmed'){
                 $data = BusinessSetting::where('key', 'order_confirmation_msg')->first();
             } elseif($status == 'processing'){
@@ -161,6 +163,7 @@ class Helpers
             }else{
                 $data = '{"status":"0","message":""}';
             }
+
             return $data['value']['message'];
         }
         

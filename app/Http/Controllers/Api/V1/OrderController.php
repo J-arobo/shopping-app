@@ -126,7 +126,7 @@ class OrderController extends Controller
             return response()->json([
                 'message' => trans('messages.order_placed_successfully'),
                 'order_id' =>  $save_order,
-                'total_ammount' => $total_price,
+                'total_amount' => $total_price,
                 
             ], 200);
         } catch (\Exception $e) {

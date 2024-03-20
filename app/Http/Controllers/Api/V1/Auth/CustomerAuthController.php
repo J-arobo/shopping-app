@@ -44,7 +44,7 @@ class CustomerAuthController extends Controller
             return response()->json(['token' => $token, 'is_phone_verified'=>auth()->user()->is_phone_verified], 200);
         } else {
             $errors = [];
-            array_push($errors, ['code' => 'auth-001', 'message' => 'Unauthorized.']);
+            array_push($errors, ['code' => 'auth-001', 'message' => 'Phone or password does not match.']);
             return response()->json([
                 'errors' => $errors
             ], 401);
@@ -61,7 +61,7 @@ class CustomerAuthController extends Controller
             'password' => 'required|min:6',
         ], [
             'f_name.required' => 'The first name field is required.',
-            'phone.required' => 'The  phone field is required.',
+            'phone.required' => 'The  phone number field is required.',
         ]);
 
         if ($validator->fails()) {
