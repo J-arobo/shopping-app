@@ -118,7 +118,7 @@ class OrderController extends Controller
             /*
                 newly added for sending notifications
             */
-            Helpers::send_order_notification($order, $request->user()->cm_firebase_token);
+            //Helpers::send_order_notification($order, $request->user()->cm_firebase_token);
             /*
             ends here
             */

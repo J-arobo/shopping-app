@@ -85,7 +85,8 @@ class Helpers
                 }else{
                     $key = BusinessSetting::where(['key' => 'push_notification_key'])->first()->value;
                 }
-
+                
+                //$url = "https://fcm.googleapis.com/v1/projects/food-delivery-app-a7afc/messages:send";
                 $url = "https://fcm.googleapis.com/fcm/send";
                 $header = array("authorization:key=" . $key['content'] . "",
                     "content-type: application/json"
